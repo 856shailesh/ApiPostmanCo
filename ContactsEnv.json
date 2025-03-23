@@ -1,0 +1,27 @@
+{
+	"id": "49c02194-57f4-440e-a7d4-f2b19d503006",
+	"name": "ContactsEnv",
+	"values": [
+		{
+			"key": "baseURL",
+			"value": "https://thinking-tester-contact-list.herokuapp.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "856shaileshk@gmail.com",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "NaveenAuto",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2025-03-23T01:51:10.284Z",
+	"_postman_exported_using": "Postman/11.36.6"
+}

@@ -1,0 +1,16 @@
+[
+    {
+        "name": "rahul",
+        "city": "ghaziabad"
+    },
+    {
+        "name": "shailesh",
+        "city": "delhi",
+        "designation" : "sdet"
+    },
+    {
+        "name": "varsha",
+        "city": "udupi",
+        "language" : ["Hindi" , "English"]
+    }
+]

@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "491f2d2e-e35c-4e54-83b5-96da93184c9d",
+		"name": "ContactsAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4516358",
+		"_collection_link": "https://martian-zodiac-867019.postman.co/workspace/2acf8bb9-0497-4267-bb78-fab5634bb787/collection/4516358-491f2d2e-e35c-4e54-83b5-96da93184c9d?action=share&source=collection_link&creator=4516358"
+	},
+	"item": [
+		{
+			"name": "Login User-Get Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"856shaileshk@gmail.com\",\n    \"password\": \"NaveenAuto\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/users/login",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllContacts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{vault:JWTtoken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/contacts",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get a user by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2E4MTA1MWYyNjY3YTAwMTM1MmJiMTkiLCJpYXQiOjE3MzkwNjc0NzN9.NSbbi7yDwvhadr49wuHLn-lHMQOW-q7cCVpNw58foa8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/contacts/67a814fe4f7cd2001314a1e1",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contacts",
+						"67a814fe4f7cd2001314a1e1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new record",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2E4MTA1MWYyNjY3YTAwMTM1MmJiMTkiLCJpYXQiOjE3MzkwNjg2MzF9.fNs18bbBOAL2MAkg7P_-qUoJr6SHF8RiL1dUZECo-8k",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"firstName\": \"hello\",\n        \"lastName\": \"world\",\n        \"birthdate\": \"2001-02-02\",\n        \"email\": \"hello@gmail.com\",\n        \"phone\": \"2323232323\",\n        \"city\": \"Noida\",\n        \"stateProvince\": \"we\",\n        \"postalCode\": \"302004\",\n        \"country\": \"India\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/contacts",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contacts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a Request",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2E4MTA1MWYyNjY3YTAwMTM1MmJiMTkiLCJpYXQiOjE3MzkwNjc0NzN9.NSbbi7yDwvhadr49wuHLn-lHMQOW-q7cCVpNw58foa8",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"firstName\": \"tom\",\n    \"lastName\": \"bully\",\n    \"city\": \"banglore\",\n    \"country\": \"India\",\n    \"owner\": \"67a81051f2667a001352bb19\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/contacts/67a817b44f7cd2001314a1e6",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contacts",
+						"67a817b44f7cd2001314a1e6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2E4MTA1MWYyNjY3YTAwMTM1MmJiMTkiLCJpYXQiOjE3MzkwNjc0NzN9.NSbbi7yDwvhadr49wuHLn-lHMQOW-q7cCVpNw58foa8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://thinking-tester-contact-list.herokuapp.com/contacts/67a815e74f7cd2001314a1e2",
+					"protocol": "https",
+					"host": [
+						"thinking-tester-contact-list",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"contacts",
+						"67a815e74f7cd2001314a1e2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

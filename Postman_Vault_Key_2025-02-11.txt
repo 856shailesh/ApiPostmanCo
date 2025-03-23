@@ -1,0 +1,7 @@
+Your Postman Vault Key (856shailesh@gmail.com)
+
+b3ef0820bfa43a4a962474e776639a997ef825b5d20e04eaa4cbe652be97f3c9
+
+• Keep this key somewhere safe but accessible.
+• Need more information? Visit https://go.pstmn.io/vault
+• This key was generated on: Feb 11 2025.

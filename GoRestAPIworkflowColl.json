@@ -1,0 +1,259 @@
+{
+	"info": {
+		"_postman_id": "195d06df-4eaa-475d-ab2a-72e92a12fde6",
+		"name": "GoRestAPIworkflow",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4516358",
+		"_collection_link": "https://martian-zodiac-867019.postman.co/workspace/Jan2025api~2acf8bb9-0497-4267-bb78-fab5634bb787/collection/4516358-195d06df-4eaa-475d-ab2a-72e92a12fde6?action=share&source=collection_link&creator=4516358"
+	},
+	"item": [
+		{
+			"name": "1-GetAllUsers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Check the status code is 200:",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2-CreateUser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.json();",
+							"const user_id = response.id;",
+							"console.log(\"User id is : \",user_id)",
+							"//Create Local Variable , highest Priority",
+							"pm.variables.set(\"userID\",user_id);",
+							"",
+							"//Test Case",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"pm.test(\"Check user name is shailesh\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.name).to.eql(\"shailesh\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"shailesh\",\n    \"gender\": \"male\",\n    \"email\": \"shailesh_{{$randomEmail}}\",\n    \"status\": \"active\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3-GetUserbyID",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"check user ID is correct\", function(){",
+							"    //Get user ID from current request",
+							"    const acutalID = pm.variables.get(\"userID\");",
+							"    //ID from response",
+							"    const jsonData = pm.response.json();",
+							"    pm.expect(jsonData.id).to.eql(acutalID);",
+							"})",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{userID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4-UpdateUserbyID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"inactive\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{userID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5-DeleteUserbyID",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{userID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "6-GetUserbyID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{userID}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{userID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

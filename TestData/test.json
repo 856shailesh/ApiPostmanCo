@@ -1,0 +1,15 @@
+[
+
+	{
+    "name": "akkhu",
+    "gender": "female",
+    "status": "inactive",
+    "newStatus": "active"
+},{
+	"name": "surya",
+    "gender": "male",
+    "status": "inactive",
+    "newStatus": "active"
+}
+
+]

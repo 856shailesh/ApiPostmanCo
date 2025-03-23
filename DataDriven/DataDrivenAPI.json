@@ -1,0 +1,133 @@
+{
+	"info": {
+		"_postman_id": "d1a28d28-daf6-4a18-bbb9-56ddbe07721d",
+		"name": "DataDrivenAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4516358",
+		"_collection_link": "https://martian-zodiac-867019.postman.co/workspace/2acf8bb9-0497-4267-bb78-fab5634bb787/collection/4516358-d1a28d28-daf6-4a18-bbb9-56ddbe07721d?action=share&source=collection_link&creator=4516358"
+	},
+	"item": [
+		{
+			"name": "DataDrivenBody",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Data validation\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    //Data Variable",
+							"    pm.expect(jsonData.name).to.eql(pm.iterationData.get(\"name\"));",
+							"    pm.expect(jsonData.gender).to.eql(pm.iterationData.get(\"gender\"));",
+							"    pm.expect(jsonData.status).to.eql(pm.iterationData.get(\"status\"));",
+							"    //How to test random Email",
+							"    const rawJSONBody = pm.request.body.raw;",
+							"    //json to JS object",
+							"    const req = JSON.parse(rawJSONBody);",
+							"    const email = req.email;",
+							"    console.log(\"Email is ====> \", email);",
+							"    //Compare actual with expected",
+							"    pm.expect(jsonData.email).to.eql(email);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"const userID = response.id;",
+							"pm.variables.set(\"user_id\",userID);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "//name,gender,status : fetching from CSV files\n{\n    \"name\": \"{{name}}\",\n    \"gender\": \"{{gender}}\",\n    \"email\": \"shailesh_{{$randomEmail}}\",\n    \"status\": \"{{status}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"is user status updated\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.status).to.eql(pm.iterationData.get(\"newstatus\"));",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{tokenID}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\" : \"{{newstatus}}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/public/v2/users/{{user_id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"public",
+						"v2",
+						"users",
+						"{{user_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
